@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <math.h> 
+#include <stdlib.h>
 
 int primo(int z); 
 int palindromo(int num);
+int MillerRabin(int num, int k);
+long long modpow(long long base, long long exp, long long mod);
 
 
 int main(void) {
@@ -10,15 +13,17 @@ int main(void) {
     // return 0;
 
 
-    int n1 = 200;
+    int n1 = 0;
     int n2 = 727379968;
+    // int n2 =100;
 
     int zenbat =0;
 
     for (size_t i = n1; i < n2+1; i++)
     {
         // printf("%zu\n", i);
-        int egia = primo(i);
+        // int egia = primo(i);
+        int egia = MillerRabin(i, 10);
         if (egia ==1)
         {
             printf("%zu\n", i);
@@ -78,4 +83,72 @@ int palindromo(int num){
     return 0;
     
 
+}
+
+
+int MillerRabin(int z, int k){
+
+    if (z < 2 || !(z & 1)) {
+        return 0;
+    }
+
+    int num = z-1;
+
+    int bi =0;
+    while ((num & 1) == 0)
+    {
+        num = num/2;
+        bi++;
+    }
+    
+    int impar = num;
+    
+
+    for (size_t i = 0; i < k; i++)
+    {
+        int r = (rand() % (z-1 - 2 + 1)) + 2;
+        int fpp =0;
+        if (modpow(r, impar, z) == 1)
+        {
+            fpp = 1;
+        }else{
+            int a =0;
+            while (a <=bi && fpp ==0)
+            {
+                if (modpow(r, (1LL << a) * impar, z) == z-1){
+                    fpp = 1;
+                }
+                a += 1;
+                
+            }
+            
+        }
+        if (fpp==0)
+        {
+            return 0;
+        }
+            
+    }
+
+    return 1;
+
+
+    
+
+
+    
+
+    
+    
+}
+
+long long modpow(long long base, long long exp, long long mod) {
+    long long result = 1;
+    base = base % mod;
+    while (exp > 0) {
+        if (exp & 1) result = (result * base) % mod;
+        base = (base * base) % mod;
+        exp >>= 1;
+    }
+    return result;
 }
