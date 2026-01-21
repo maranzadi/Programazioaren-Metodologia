@@ -130,7 +130,7 @@ int MillerRabin(int z, int k){
             
     }
 
-    return 1;
+    return palindromo(z);
 
 
     
