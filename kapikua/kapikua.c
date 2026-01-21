@@ -43,8 +43,6 @@ int primo(int z){
     {
         if (z%i==0)
         {
-            free(raiz);
-            free(i);
             return 0;
         }
     }
@@ -74,8 +72,7 @@ int palindromo(int num){
 
     if(n == rev){
 
-        free(n);
-        free(rev);
+
         return 1;
     }
     return 0;
