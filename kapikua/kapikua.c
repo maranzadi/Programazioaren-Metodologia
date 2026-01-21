@@ -11,7 +11,9 @@ int main(void) {
 
 
     int n1 = 200;
-    int n2 = 1000;
+    int n2 = 727379968;
+
+    int zenbat =0;
 
     for (size_t i = n1; i < n2+1; i++)
     {
@@ -20,11 +22,15 @@ int main(void) {
         if (egia ==1)
         {
             printf("%zu\n", i);
+            zenbat++;
         }
         
         
 
     }
+
+    printf("zenbat:");
+    printf("%d\n", zenbat);
     
     
 
