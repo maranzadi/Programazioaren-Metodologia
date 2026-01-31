@@ -1,4 +1,4 @@
-gcc -O2 merge.c -o merge
+gcc merge.c -O2 -o merge
 
 chmod +x merge
 
