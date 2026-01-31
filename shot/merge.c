@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
     int myNumbers[] = {6,3,4,1,5,2,7,0};
     int size = sizeof(myNumbers) / sizeof(myNumbers[0]);
 
-    int ordenatuta* = ordenar(myNumbers, size);
+    int *ordenatuta = ordenar(myNumbers, size);
 
     for (size_t i = 0; i < size; i++)
     {
