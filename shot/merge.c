@@ -11,7 +11,13 @@ int main(int argc, char const *argv[])
 {
     /* code */
 
-    int myNumbers[] = {6,3,4,1,5,2,7,0};
+    int z = 10;
+    int myNumbers[z];
+    for (size_t i = 0; i < z; i++)
+    {
+        myNumbers[i] = rand();
+    }
+    
     int size = sizeof(myNumbers) / sizeof(myNumbers[0]);
 
     ordenar(myNumbers, size);
