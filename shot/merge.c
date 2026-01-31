@@ -3,7 +3,9 @@
 #include <stdlib.h>
 
 
-int ordenar(int *lista, int size);
+void ordenar(int *lista, int size);
+void merge(int *lista, int *left, int leftSize, int *right, int rightSize);
+
 
 int main(int argc, char const *argv[])
 {
@@ -12,11 +14,11 @@ int main(int argc, char const *argv[])
     int myNumbers[] = {6,3,4,1,5,2,7,0};
     int size = sizeof(myNumbers) / sizeof(myNumbers[0]);
 
-    int *ordenatuta = ordenar(myNumbers, size);
+    ordenar(myNumbers, size);
 
     for (size_t i = 0; i < size; i++)
     {
-        printf("El número es: %d\n", ordenatuta[i]);
+        printf("El número es: %d\n", myNumbers[i]);
     }
     
 
@@ -24,60 +26,41 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-int ordenar(int *lista, int size){
-    //int listaOr[size];
+void ordenar(int *lista, int size) {
+    if (size <= 1){
+        return;
+    }
 
-    int numbers[size];
-    
     int mid = size / 2;
 
     int left[mid];
     int right[size - mid];
 
-
-    for (int i = 0; i < mid; i++) {
+    for (int i = 0; i < mid; i++)
         left[i] = lista[i];
-        right[i] = lista[mid + i];
+
+    for (int i = mid; i < size; i++)
+        right[i - mid] = lista[i];
+
+    ordenar(left, mid);
+    ordenar(right, size - mid);
+
+    merge(lista, left, mid, right, size - mid);
+}
+
+void merge(int *lista, int *left, int leftSize, int *right, int rightSize) {
+    int i = 0, j = 0, k = 0;
+
+    while (i < leftSize && j < rightSize) {
+        if (left[i] <= right[j])
+            lista[k++] = left[i++];
+        else
+            lista[k++] = right[j++];
     }
 
-    if (size <= 1)
-    {
-        
-        ordenar(left, mid);
-        ordenar(right, mid);
-    }else{
-        int leftSize =0;
-        int rigthSize = 0;
-        int indi=0;
-        while (leftSize<mid && rigthSize<mid)
-        {
-            if (leftSize>mid)
-            {
-                numbers[indi] = right[rigthSize];
-                rigthSize++;
-            }
-            else if (rigthSize>mid)
-            {
-                numbers[indi] = left[leftSize];
-                leftSize++;
-            }
-            else if (left[leftSize]> right[rigthSize])
-            {
-                numbers[indi] = right[rigthSize];;
-                rigthSize++;
-            }else if (left[leftSize]< right[rigthSize])
-            {
-                numbers[indi] = left[leftSize];;
-                leftSize++;
-            }
-            indi++;
-        }
-        
-        return numbers;
-        
-    }
+    while (i < leftSize)
+        lista[k++] = left[i++];
 
-    
-    
-    
+    while (j < rightSize)
+        lista[k++] = right[j++];
 }
