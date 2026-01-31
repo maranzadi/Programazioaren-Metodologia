@@ -1,4 +1,9 @@
-#include <cstddef>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int ordenar(int *lista, int size);
 
 int main(int argc, char const *argv[])
 {
@@ -14,7 +19,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void ordenar(int *lista, int size){
+int ordenar(int *lista, int size){
     //int listaOr[size];
 
     if (size !=1)
@@ -26,13 +31,14 @@ void ordenar(int *lista, int size){
 
 
         for (int i = 0; i < mid; i++) {
-            left[i] = arr[i];
-            right[i] = arr[mid + i];
+            left[i] = lista[i];
+            right[i] = lista[mid + i];
         }
         ordenar(left, mid);
-        ordenar(right, mid)
+        ordenar(right, mid);
+    }else{
+        printf("El número es: %d\n", lista[0]);
     }
-    
 
     
     
