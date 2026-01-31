@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 {
     /* code */
 
-    int z = 2147483647;
+    int z = 10000;
     int myNumbers[z];
     for (size_t i = 0; i < z; i++)
     {
