@@ -30,7 +30,7 @@ void ordenar(int *lista, int size){
             right[i] = arr[mid + i];
         }
         ordenar(left, mid);
-        ordenar(right, ordenar)
+        ordenar(right, mid)
     }
     
 
