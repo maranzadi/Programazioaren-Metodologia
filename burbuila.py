@@ -35,4 +35,3 @@ def burbuilaR(lista, n=None):
     return burbuilaR(lista, n-1)
 
 print(burbuilaR(lista))
-
