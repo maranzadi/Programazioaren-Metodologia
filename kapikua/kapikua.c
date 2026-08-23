@@ -31,22 +31,26 @@ int main(void) {
     // int n2 = 727379968; //Hasta
     // int n2 =100;
 
-    int cadaCuantos = n2 / hilos;
-    int zenbatDoaz=0;
+    int total = n2 - n1 + 1;
+    int cadaCuantos = total / hilos;
+    int resto = total % hilos;
 
     pthread_t lista[hilos];
     
-
+    int inicio = n1;
     for (size_t i = 0; i < hilos; i++)
     {
-
+        int cantidad = cadaCuantos;
+        if (i < resto)
+            cantidad++;
         pthread_t thread;
         Numeros args = {
             .id = i,
-            .empieza = zenbatDoaz+1,
-            .termina = zenbatDoaz+cadaCuantos
+            .empieza = inicio,
+            .termina = inicio + cantidad
         };
-        zenbatDoaz+=cadaCuantos;
+        inicio += cantidad;
+        
         pthread_create(&thread, NULL, multiThread, &args);
         lista[i] = thread;
 
