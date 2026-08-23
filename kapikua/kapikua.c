@@ -13,8 +13,8 @@ int main(void) {
     // return 0;
 
 
-    int n1 = 0;
-    int n2 = 727379968;
+    int n1 = 2; //Desde
+    int n2 = 727379968; //Hasta
     // int n2 =100;
 
     int zenbat =0;
@@ -88,7 +88,7 @@ int palindromo(int num){
 
 int MillerRabin(int z, int k){
 
-    if (z < 2 || !(z & 1)) {
+    if (!(z & 1)) {
         return 0;
     }
 
@@ -130,7 +130,8 @@ int MillerRabin(int z, int k){
             
     }
 
-    return palindromo(z);
+    return (z);
+    // return palindromo(z);
 
 
     
