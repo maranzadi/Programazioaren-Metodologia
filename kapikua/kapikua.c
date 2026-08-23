@@ -27,8 +27,8 @@ int main(void) {
 
 
     int n1 = 2; //Desde
-    int n2 = 10000;
-    // int n2 = 727379968; //Hasta
+    // int n2 = 10000;
+    int n2 = 727379968; //Hasta
     // int n2 =100;
 
     int total = n2 - n1 + 1;
@@ -50,7 +50,7 @@ int main(void) {
             .termina = inicio + cantidad
         };
         inicio += cantidad;
-        
+
         pthread_create(&thread, NULL, multiThread, &args);
         lista[i] = thread;
 
@@ -90,7 +90,7 @@ void* multiThread(void *arg){
         int egia = MillerRabin(i, 10);
         if (egia ==1)
         {
-            printf("%zu\n", i);
+            // printf("%zu\n", i);
             zenbat++;
         }
         
