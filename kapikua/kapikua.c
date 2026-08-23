@@ -9,6 +9,13 @@ int primo(int z);
 int palindromo(int num);
 int MillerRabin(int num, int k);
 long long modpow(long long base, long long exp, long long mod);
+void* multiThread(void *arg);
+typedef struct {
+    int id;
+    int empieza;
+    int termina;
+} Numeros;
+
 
 
 int main(void) {
@@ -16,7 +23,7 @@ int main(void) {
     // return 0;
 
     long hilos = sysconf(_SC_NPROCESSORS_ONLN);
-    printf("%zu\n", hilos);
+    // printf("%zu\n", hilos);
 
 
     int n1 = 2; //Desde
@@ -25,7 +32,21 @@ int main(void) {
 
     int zenbat =0;
 
+    for (size_t i = 0; i < hilos; i++)
+    {
+        pthread_t thread;
+        Numeros args = {
+            .id = i,
+            .empieza = 0,
+            .termina = 10
+        };
+        pthread_create(&thread, NULL, multiThread, &args);
+
+        pthread_join(thread, NULL);
+
+    }
     
+
 
     for (size_t i = n1; i < n2+1; i++)
     {
@@ -48,6 +69,16 @@ int main(void) {
     
 
 
+}
+
+void* multiThread(void *arg){
+    Numeros *args = (Numeros *)arg;
+
+    printf("ID: %d\n", args->id);
+    printf("Empieza: %d\n", args->empieza);
+    printf("Termina: %d\n", args->termina);
+
+    return NULL;
 }
 
 int primo(int z){
