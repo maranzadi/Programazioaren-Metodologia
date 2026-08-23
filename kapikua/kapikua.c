@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <math.h> 
 #include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
+
 
 int primo(int z); 
 int palindromo(int num);
@@ -12,12 +15,17 @@ int main(void) {
     // printf("Hello, World!\n");
     // return 0;
 
+    long hilos = sysconf(_SC_NPROCESSORS_ONLN);
+    printf("%zu\n", hilos);
+
 
     int n1 = 2; //Desde
     int n2 = 727379968; //Hasta
     // int n2 =100;
 
     int zenbat =0;
+
+    
 
     for (size_t i = n1; i < n2+1; i++)
     {
