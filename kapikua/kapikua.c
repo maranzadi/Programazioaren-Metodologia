@@ -16,7 +16,7 @@ typedef struct {
     int termina;
 } Numeros;
 
-
+int zenbat =0;
 
 int main(void) {
     // printf("Hello, World!\n");
@@ -27,28 +27,59 @@ int main(void) {
 
 
     int n1 = 2; //Desde
-    int n2 = 727379968; //Hasta
+    int n2 = 10000;
+    // int n2 = 727379968; //Hasta
     // int n2 =100;
 
-    int zenbat =0;
+    int cadaCuantos = n2 / hilos;
+    int zenbatDoaz=0;
+
+    pthread_t lista[hilos];
+    
 
     for (size_t i = 0; i < hilos; i++)
     {
+
         pthread_t thread;
         Numeros args = {
             .id = i,
-            .empieza = 0,
-            .termina = 10
+            .empieza = zenbatDoaz+1,
+            .termina = zenbatDoaz+cadaCuantos
         };
+        zenbatDoaz+=cadaCuantos;
         pthread_create(&thread, NULL, multiThread, &args);
+        lista[i] = thread;
 
+    }
+    for (size_t i = 0; i < hilos; i++)
+    {
+
+        pthread_t thread = lista[i];
         pthread_join(thread, NULL);
 
     }
     
 
 
-    for (size_t i = n1; i < n2+1; i++)
+    
+
+    printf("zenbat:");
+    printf("%d\n", zenbat);
+    
+    
+
+
+}
+
+void* multiThread(void *arg){
+    Numeros *args = (Numeros *)arg;
+
+    // printf("ID: %d\n", args->id);
+    // printf("Empieza: %d\n", args->empieza);
+    // printf("Termina: %d\n", args->termina);
+
+
+    for (size_t i = args->empieza; i < args->termina; i++)
     {
         // printf("%zu\n", i);
         // int egia = primo(i);
@@ -62,21 +93,6 @@ int main(void) {
         
 
     }
-
-    printf("zenbat:");
-    printf("%d\n", zenbat);
-    
-    
-
-
-}
-
-void* multiThread(void *arg){
-    Numeros *args = (Numeros *)arg;
-
-    printf("ID: %d\n", args->id);
-    printf("Empieza: %d\n", args->empieza);
-    printf("Termina: %d\n", args->termina);
 
     return NULL;
 }
@@ -169,7 +185,7 @@ int MillerRabin(int z, int k){
             
     }
 
-    return (z);
+    return (1);
     // return palindromo(z);
 
 
